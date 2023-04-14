@@ -1,0 +1,31 @@
+{
+  "name": "electron-app",
+  "version": "1.0.0",
+  "description": "My first app on electron",
+  "main": "main.js",
+  "scripts": {
+    "test": "itzme",
+    "start": "nodemon --exec electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acoustic-reaper/introduction-to-github.git"
+  },
+  "author": "acoustic_reaper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acoustic-reaper/introduction-to-github/issues"
+  },
+  "homepage": "https://github.com/acoustic-reaper/introduction-to-github#readme",
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "child_process": "^1.0.2",
+    "child-process": "^1.0.2",
+    "electron": "^24.1.0",
+    "electron-shutdown-command": "^2.0.1",
+    "mongoose": "^7.0.3",
+    "node-shutdown": "^1.0.9",
+    "nodemon": "^2.0.22",
+    "socket.io-client": "^4.6.1"
+  }
+}
