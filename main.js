@@ -1,8 +1,11 @@
 const { app, BrowserWindow, ipcMain, Menu, dialog, Tray } = require('electron');
 const io = require('socket.io-client');
+const mongoose = require('mongoose');
 const { join } = require('path');
 const { exec } = require ('child_process');
-const shutdown = require('electron-shutdown-command');
+
+let ACCESS_CODE = null;
+// const shutdown = require('electron-shutdown-command');
 
 // var AutoLaunch = require('auto-launch');
 // var autoLauncher = new AutoLaunch({
@@ -17,6 +20,7 @@ const shutdown = require('electron-shutdown-command');
 // });
 
 
+// app.post()
 let menu = Menu.buildFromTemplate([])
 Menu.setApplicationMenu(menu)
 let win= null;
@@ -65,14 +69,8 @@ function createWindow () {
   })
   }
 
-ipcMain.handle('shutdown', () => {
-  function shutdown(callback){
-    exec('shutdown /s', function(error, stdout, stderr){ callback(stdout); });
-}
-shutdown(function(output){
-  console.log(output);
-});
-})
+
+  
 
 app.whenReady().then(() => {
   createWindow()
@@ -82,12 +80,45 @@ app.whenReady().then(() => {
     console.log(`Received control message: ${data}`);
     if (data === 'shutdown') {
         //code to shutdown
-        shutdown.shutdown(); 
+        // shutdown.shutdown(); 
+        function shutdown(callback){
+          exec('shutdown /p', function(error, stdout, stderr){ callback(stdout); });
+      }
+      shutdown(function(output){
+        console.log(output);
+      });
 }
+    else if (data === 'restart')
+    {
+      function shutdown(callback){
+        exec('shutdown /r', function(error, stdout, stderr){ callback(stdout); });
+    }
+    shutdown(function(output){
+      console.log(output);
+    });
+    }
+    else if (data == 'hibernate')
+    {
+      function shutdown(callback){
+        exec('shutdown /h', function(error, stdout, stderr){ callback(stdout); });
+    }
+    shutdown(function(output){
+      console.log(output);
+    });
+    }
+    else if (data === 'logoff')
+    {
+      function shutdown(callback){
+        exec('shutdown /l', function(error, stdout, stderr){ callback(stdout); });
+    }
+    shutdown(function(output){
+      console.log(output);
+    });
+    }
 });
-  app.setLoginItemSettings({
-    openAtLogin: true    
-  })
+  // app.setLoginItemSettings({
+  //   openAtLogin: false   
+  // })
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()
