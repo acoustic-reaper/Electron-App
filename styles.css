@@ -1,4 +1,4 @@
-.greeting{
+.header{
     margin-top: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: bolder;
@@ -13,12 +13,24 @@ body{
     background-color: #022a30;
 }
 
-.ACCESS_CODE{
+.myclass{
     margin-top: 40px;
     display: flex;
     justify-content: center;
     color: #033f47;
-    /* width: fit-content; */
+    padding:5px 8px 5px 8px;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 1em;
+    text-align: center;
+    background-color: #e0f780;
+}
+
+button{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    color: #033f47;
     padding:5px 8px 5px 8px;
     border-radius: 10px;
     font-weight: bold;
@@ -27,8 +39,11 @@ body{
     background-color: #e0f780;
 }
 
-
 footer{
     color:#eef3db;
     padding: 100px 0px;
+}
+
+.class2{
+    justify-content: center;display: flex;
 }
