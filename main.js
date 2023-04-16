@@ -198,12 +198,6 @@ app.whenReady().then(() => {
   });
   // Socket function ends here
 
-
-  // Functionality that starts app automatically on device startup
-  app.setLoginItemSettings({
-    openAtLogin: true
-  })
-
   // Checking if activated and no window open
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
