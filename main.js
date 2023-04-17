@@ -148,51 +148,85 @@ app.whenReady().then(() => {
     if (data[0] === username && data[1] === accesscode) {
       // Shutdown
       if (data[2] === "shutdown") {
-        //code to shutdown : '/p' means shutdown immediately
-        function shutdown(callback) {
-          exec("shutdown /p", function (error, stdout, stderr) {
-            callback(stdout);
+        // For MacOS and Linux Systems
+        if (process.platform === 'linux' || process.platform === 'darwin') {
+            exec('poweroff');
+        }
+        else {
+          // For Windows
+          //code to shutdown : '/p' means shutdown immediately
+          function shutdown(callback) {
+            exec("shutdown /p", function (error, stdout, stderr) {
+              callback(stdout);
+            });
+          }
+          shutdown(function (output) {
+            console.log(output);
           });
         }
-        shutdown(function (output) {
-          console.log(output);
-        });
       } 
       // Restart
       else if (data[2] === "restart") {
-        // '/r' means restart
-        function restart(callback) {
-          exec("shutdown /r", function (error, stdout, stderr) {
-            callback(stdout);
+        // MacOS and Linux
+        if (process.platform === 'linux' || process.platform === 'darwin') {
+          exec('reboot');
+        }
+        else {
+          // '/r' means restart
+          function restart(callback) {
+            exec("shutdown /r", function (error, stdout, stderr) {
+              callback(stdout);
+            });
+          }
+          restart(function (output) {
+            console.log(output);
           });
         }
-        restart(function (output) {
-          console.log(output);
-        });
       } 
       // Hibernate
       else if (data[2] == "hibernate") {
-        // '/h' means hibernate
-        function hibernate(callback) {
-          exec("shutdown /h", function (error, stdout, stderr) {
-            callback(stdout);
-          });
+        // Linux
+        if (process.platform === 'linux') {
+          exec('systemctl hibernate');
+        } 
+        // MacOS
+        else if (process.platform === 'darwin') {
+          // macOS doesn't have a built-in hibernate command, you can use third-party software like "SmartSleep"
+          console.log('acOS doesn\'t have a built-in hibernate command');
         }
-        hibernate(function (output) {
-          console.log(output);
-        });
-      } 
+        else {
+          // '/h' means hibernate
+          function hibernate(callback) {
+            exec("shutdown /h", function (error, stdout, stderr) {
+              callback(stdout);
+            });
+          }
+          hibernate(function (output) {
+            console.log(output);
+          });
+        } 
+      }
       // Logoff
       else if (data[2] === "logoff") {
-        function logoff(callback) {
-          // '/l' means logoff
-          exec("shutdown /l", function (error, stdout, stderr) {
-            callback(stdout);
+        // Linux
+        if (process.platform === 'linux') {
+          exec('gnome-session-quit --logout');
+        } 
+        // MacOS
+        else if (process.platform === 'darwin') {
+          exec('osascript -e \'tell app "System Events" to log out\'');
+        }
+        else {
+          function logoff(callback) {
+            // '/l' means logoff
+            exec("shutdown /l", function (error, stdout, stderr) {
+              callback(stdout);
+            });
+          }
+          logoff(function (output) {
+            console.log(output);
           });
         }
-        logoff(function (output) {
-          console.log(output);
-        });
       }
     }
   });
