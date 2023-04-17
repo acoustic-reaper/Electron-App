@@ -7,7 +7,7 @@ other business logic), and a desktop application(which would be installed on the
 
 This is The Desktop Application code written in ElectronJS:
 ## Here's how to test it (NodeJS should be installed on your system): 
-(You also need to run the mobile application in another PC to test the complete project, Link to mobile
+(You may also need to run the mobile application in another PC to test the complete project, Link to mobile
 application repository: https://github.com/acoustic-reaper/React-Native-Mobile-App).
 
 ## Step 1:
