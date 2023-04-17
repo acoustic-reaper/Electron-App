@@ -119,6 +119,7 @@ function createWindow()
 }
 // Createwindow function ends here
 
+
 // function to display currently set username and accesscode onto front-end
 function display(window) {
   // Reading data from text files
